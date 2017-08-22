@@ -1,0 +1,37 @@
+---
+# roles/dataserver/tasks/main.yml
+
+- name: login to registry
+  docker_login:
+    username: '{{ docker_registry_user }}'
+    password: '{{ docker_registry_pass }}'
+    email: '{{ docker_registry_email }}'
+
+- name: postgres data container
+  docker_container:
+    name: pg_data
+    image: busybox
+    state: present
+    volumes:
+      - /var/lib/postgresql
+
+- name: start the local postgres for demo
+  docker_container:
+    name: postgres
+    image: postgres
+    state: started
+    volumes_from:
+      - pg_data
+    log_driver: awslogs
+    log_options:
+      awslogs-region: "{{ region }}"
+      awslogs-group: "{{ awslogs_group }}"
+      awslogs-stream: postgres
+    env:
+      POSTGRES_USER: "{{ PG_USER }}"
+      POSTGRES_PASSWORD: "{{ PG_PASSWORD }}"
+      POSTGRES_DB: "{{ PG_DATABASE }}"
+    restart_retries: 10
+    restart_policy: always
+
+# more goes on

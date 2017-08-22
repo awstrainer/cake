@@ -1,0 +1,29 @@
+---
+# This playbook deploys the whole application stack in this site.
+
+#- name: launch aws servers
+#  hosts: localhost
+#  connection: local
+#  become: False
+#  gather_facts: False
+#  tags: provisioning
+  
+#  roles:
+#  - launch
+
+- name: run docker
+  hosts: tag_Name_webserver
+  remote_user: ec2-user
+  become: True
+#  become_user: root
+#  become_method: sudo
+
+  roles:
+  - docker
+
+- name: deploy MySQL and configure the databases
+  hosts: dbservers
+  remote_user: root
+
+  roles:
+  - dataserver
