@@ -1,15 +1,13 @@
 ---
 instance_type: t2.micro
-security_group: webserver # Change the security group name here
-image: ami-489f8e2c # Change the AMI, from which you want to launch the server
-region: eu-west-2 # Change the Region
+security_group: webserver
+image: ami-489f8e2c
+region: eu-west-2 
 count: 2
-group_name: 'MyWebDMZ'
-AWS_ACCESS_KEY_ID: "{{ vault_AWS_ACCESS_KEY_ID }}"
-AWS_SECRET_ACCESS_KEY: "{{ vault_AWS_SECRET_ACCESS_KEY }}"
-#group_name: EC2_Full_Access
-#iam_profile: "noaccess" # no access as a failsafe, overriden by group
+#group_name: 'MyWebDMZ'
+#AWS_ACCESS_KEY_ID: "{{ vault_AWS_ACCESS_KEY_ID }}"
+#AWS_SECRET_ACCESS_KEY: "{{ vault_AWS_SECRET_ACCESS_KEY }}"
 key_name: newkey
-
+pip_extra_args: '-i https://pypi.doubanio.com/simple'
 volumes: []
-
+remote_user: ec2-user
