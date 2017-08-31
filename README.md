@@ -20,7 +20,8 @@ $ ansible-playbook site.yml
 # This will do following actions
 ```bash
 1. ec2 instance(s) will be provisioned
-2. Refresh dynamic inventory
-3. Docker and other prerequisites are installed
+2. Will refresh dynamic inventory
+3. Docker and other prerequisites will be installed
 4. Wordpress compose file will be copied to remote server and get executed 
+5. We should be able to access the app at http://localhost:8000 #localhost is AWS server being provisioned here
 ```
