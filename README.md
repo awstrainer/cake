@@ -1,4 +1,4 @@
-# cake
+# wordpress app
 
 This is a sample Wordpress based application hostedd on AWS and a monitoring mechanism using Prometheus, grafana and cadvisor 
 AWS dynamic inventory is being used here
