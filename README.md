@@ -1,6 +1,6 @@
 # wordpress app
 
-This is a sample Wordpress based application hosted on AWS, provisioned by Ansible and a monitoring mechanism using Prometheus, grafana and cadvisor 
+This is a sample Wordpress based application hosted on AWS, provisioned by Ansible and a monitoring mechanism using Prometheus, Grafana and cAdvisor 
 AWS dynamic inventory is being used here
 
 # Pre-requisites
