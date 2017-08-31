@@ -8,6 +8,8 @@ AWS dynamic inventory is being used here
 ```bash
 ssh acces to a linux server and Ansible installed on the server
 Access to variables.sh, containing AWS keys, which is not checked into github
+AWS account createdd with keypair file downloaded on the server
+A security group created with access to ports:80, 22, 8000, 9090, 9100
 ```
 
 # To deploy wordpress site
