@@ -27,3 +27,9 @@ $ ansible-playbook site.yml
 4. Wordpress compose file will be copied to remote server and get executed 
 5. We should be able to access the app at http://localhost:8000 #localhost is AWS server being provisioned here
 ```
+# Next Steps:
+```bash
+To run Prometheus, cAdvisor and Grafana based monitoring clone the following repo
+https://github.com/surenbika/prom.git
+And follow the steps mentioned in the repo's readme.md to complete the configuration
+```
