@@ -19,7 +19,7 @@
   
 - name : add key
   shell: curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add - 
-# apt_key:
+#  apt_key:
 #    url: "https://download.docker.com/linux/ubuntu/gpg"
 #    state: present
 #    validate_certs: no 
@@ -46,10 +46,11 @@
   pip:
     name: "{{ item }}"
     state: latest
-#    extra_args: "{{ pip_extra_args }}"
   with_items:
-#    - docker
     - docker-compose==1.15.0
+#    - pyopenssl==0.13.1
+#    - pyasn1
+#    - ndg-httpsclient
 
 - name: copy compose file to remote server
   copy:

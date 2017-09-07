@@ -1,15 +1,9 @@
 ---
 instance_type: t2.micro
 security_group: webserver
-#image: ami-489f8e2c
 image: ami-66051402
 region: eu-west-2 
-count: 2
-#group_name: 'MyWebDMZ'
-#AWS_ACCESS_KEY_ID: "{{ vault_AWS_ACCESS_KEY_ID }}"
-#AWS_SECRET_ACCESS_KEY: "{{ vault_AWS_SECRET_ACCESS_KEY }}"
+count: 1
 key_name: mykey
-#pip_extra_args: '-i https://pypi.doubanio.com/simple'
 volumes: []
-#remote_user: ec2-user
 remote_user: ubuntu
