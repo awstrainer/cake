@@ -1,0 +1,39 @@
+- name: Install python setuptools and docker
+ # yum:
+  apt:
+    name: "{{ item }}"
+    update_cache: yes
+  with_items:
+    - python-setuptools
+    - docker
+
+- name: Install pypi
+  easy_install: name=pip
+
+- name: Install docker-py to latest
+  pip:
+    name: "{{ item }}"
+    state: latest
+    extra_args: "{{ pip_extra_args }}"
+  with_items:
+    - docker==2.0.1
+    - docker-compose==1.15.0 
+
+- name: Start docker
+  service:
+    name: docker
+    state: started
+
+- name: copy compose file to remote server
+  copy:
+    force: yes
+    src: /home/local/aws_with_ansible1/cake/docker-compose.yml
+    dest: /home/ec2-user
+
+- name: Wordpress based blogging site
+  docker_service:
+    project_src: .
+    files:   
+      - docker-compose.yml
+    pull : yes
+    state: present

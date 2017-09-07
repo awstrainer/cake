@@ -1,10 +1,43 @@
 - name: Install python setuptools and docker
-  yum:
+  apt:
     name: "{{ item }}"
     update_cache: yes
   with_items:
     - python-setuptools
-    - docker
+
+- name: Install docker prerequisites
+  apt: 
+    name: "{{ item }}"
+    update_cache: yes
+  with_items:
+    - linux-image-extra-3.13.0-125-generic
+    - linux-image-extra-virtual
+    - apt-transport-https
+    - ca-certificates
+    - curl
+    - software-properties-common
+  
+- name : add key
+  shell: curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add - 
+# apt_key:
+#    url: "https://download.docker.com/linux/ubuntu/gpg"
+#    state: present
+#    validate_certs: no 
+
+- name: adding repository
+  apt_repository:
+    repo: deb [arch=amd64] https://download.docker.com/linux/ubuntu trusty stable
+    state: present
+
+- name: Install Docker
+  apt: 
+    name: docker-ce
+    update_cache: yes
+
+- name: Start docker
+  service:
+    name: docker
+    state: started
 
 - name: Install pypi
   easy_install: name=pip
@@ -13,21 +46,16 @@
   pip:
     name: "{{ item }}"
     state: latest
-    extra_args: "{{ pip_extra_args }}"
+#    extra_args: "{{ pip_extra_args }}"
   with_items:
-    - docker==2.0.1
-    - docker-compose 
-
-- name: Start docker
-  service:
-    name: docker
-    state: started
+#    - docker
+    - docker-compose==1.15.0
 
 - name: copy compose file to remote server
   copy:
     force: yes
     src: /home/local/aws_with_ansible1/cake/docker-compose.yml
-    dest: /home/ec2-user
+    dest: /home/ubuntu
 
 - name: Wordpress based blogging site
   docker_service:
@@ -36,3 +64,10 @@
       - docker-compose.yml
     pull : yes
     state: present
+
+- name: copy daemon file to remote server
+  copy:
+    force: yes
+    src: /home/local/aws_with_ansible1/cake/daemon.json
+    dest: /etc/docker/
+

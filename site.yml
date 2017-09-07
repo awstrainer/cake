@@ -20,9 +20,11 @@
   roles:
   - docker
 
-#- name: deploy MySQL and configure the databases
-#  hosts: dbservers
-#  remote_user: root
+- name: running prometheus
+  hosts: tag_Name_webserver
+  remote_user: "{{ remote_user }}"
+  become: True
+  gather_facts: False
 
-#  roles:
-#  - dataserver
+  roles:
+  - prom

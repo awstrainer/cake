@@ -1,0 +1,20 @@
+---
+# roles/dataserver/tasks/main.yml
+- name: installing git
+  apt: 
+    name: git
+    state: present
+
+- name: cloning git repo
+  git:
+    repo: https://github.com/surenbika/prom.git
+    dest: /home/ubuntu/prom
+
+
+- name: Running prometheus
+  docker_service:
+    project_src: /home/ubuntu/prom
+    files:
+      - docker-compose.yml
+    pull : yes
+    state: present
