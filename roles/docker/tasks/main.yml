@@ -42,7 +42,7 @@
 - name: Install pypi
   easy_install: name=pip
 
-- name: Install docker-py to latest
+- name: Install docker-compose
   pip:
     name: "{{ item }}"
     state: latest

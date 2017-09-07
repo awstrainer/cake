@@ -34,8 +34,3 @@
   local_action:
     module: meta
     args: refresh_inventory
-
-- name: refresh inventory
-  local_action:
-    module: shell
-    args: /home/local/aws_with_ansible1/cake/inventory/ec2.py --refresh-cache
